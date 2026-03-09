@@ -3,320 +3,238 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>For Malkay Husna ❤️</title>
+<title>For Madam Malkay Husna ❤️</title>
 
 <style>
-*{
-  box-sizing:border-box;
-  -webkit-tap-highlight-color:transparent;
-}
 
 body{
-  margin:0;
-  padding:0;
-  font-family:Arial,sans-serif;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  min-height:100vh;
-  color:black;
-  text-align:center;
-  overflow:hidden;
-  background: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1470&q=80') no-repeat center center fixed;
-  background-size: cover;
+margin:0;
+padding:0;
+font-family:Arial, sans-serif;
+background:linear-gradient(135deg,#ff4b6e,#ff758c,#ff9a9e);
+height:100vh;
+overflow:hidden;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+color:white;
+text-align:center;
 }
 
-.container{
-  width:90%;
-  max-width:600px;
-  padding:20px;
-  position:relative;
-  z-index:10;
-  background: rgba(255,255,255,0.25);
-  border-radius:20px;
-  backdrop-filter: blur(8px);
+h1{
+font-size:2.5em;
+margin-bottom:10px;
 }
 
-.top-paragraph{
-  font-size:20px;
-  line-height:1.6;
-  margin-bottom:25px;
-  animation:fadeIn 2s ease-in-out;
-  font-weight:bold;
-}
-
-#confession{
-  font-size:20px;
-  line-height:1.6;
-  margin-bottom:20px;
-  min-height:120px;
-}
-
-#question{
-  font-size:28px;
-  margin:20px 0;
-  display:none;
-}
-
-.buttons{
-  display:none;
-  gap:10px;
-  justify-content:center;
-  flex-wrap:wrap;
+#message{
+font-size:20px;
+max-width:600px;
+padding:20px;
+line-height:1.6;
 }
 
 button{
-  font-size:18px;
-  padding:10px 20px;
-  border:none;
-  border-radius:30px;
-  cursor:pointer;
-  background:linear-gradient(45deg,#ff6b6b,#feca57);
-  color:black;
-  transition:0.3s;
+padding:12px 25px;
+border:none;
+border-radius:30px;
+background:white;
+color:#ff4b6e;
+font-size:16px;
+cursor:pointer;
+margin:10px;
+transition:0.3s;
 }
 
 button:hover{
-  transform:scale(1.1);
+transform:scale(1.1);
 }
 
-#response{
-  font-size:22px;
-  margin-top:20px;
-  display:none;
+#countdown{
+margin-top:10px;
+font-size:18px;
 }
+
+/* hearts */
 
 .heart{
-  position:fixed;
-  font-size:24px;
-  animation:float 6s linear infinite;
-  pointer-events:none;
-}
-
-.burst-heart{
-  position:fixed;
-  font-size:20px;
-  pointer-events:none;
-  z-index:999;
-}
-
-.spark{
-  position:fixed;
-  width:5px;
-  height:5px;
-  border-radius:50%;
-  background:gold;
+position:absolute;
+font-size:20px;
+animation:float 5s linear infinite;
+opacity:0.8;
 }
 
 @keyframes float{
-  0%{transform:translateY(100vh);}
-  100%{transform:translateY(-120vh);}
+
+0%{
+transform:translateY(100vh) scale(0.5);
+opacity:1;
 }
 
-@keyframes fadeIn{
-  from{opacity:0;}
-  to{opacity:1;}
+100%{
+transform:translateY(-10vh) scale(1.5);
+opacity:0;
 }
 
-#muteBtn{
-  position:fixed;
-  top:15px;
-  right:15px;
-  background:white;
-  border:none;
-  border-radius:50%;
-  width:45px;
-  height:45px;
-  font-size:20px;
-  cursor:pointer;
-  z-index:20;
 }
+
 </style>
 </head>
 
 <body>
 
-<audio id="bgMusic" loop>
-  <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3" type="audio/mpeg">
-</audio>
+<h1>For Madam Malkay Husna ❤️</h1>
 
-<button id="muteBtn">🔇</button>
-
-<div class="container">
-
-<p class="top-paragraph">
-میں اپنا دل کی سچائیوں کے ساتھ یہ اقرار کرتا ہوں <br>
-کہ میں تم سے پیار کرتا ہوں ❤️
-</p>
-
-<div id="confession"></div>
-
-<div id="question">👉 Malkay Husna, do you love me?</div>
-
-<div class="buttons">
-<button id="yesBtn">💖 Yes</button>
-<button id="noBtn">😅 No</button>
+<div id="message">
+A special message will appear here for Madam Malkay Husna...
 </div>
 
-<div id="response"></div>
+<button onclick="askNotification()">Allow Notifications 🔔</button>
+<button onclick="generateMessage()">Send Extra Message 💌</button>
 
-</div>
+<div id="countdown"></div>
 
 <script>
-const textLines=[
-"Malkay Husna…",
-"I don’t know how to say this perfectly…",
-"But my heart has been wanting to tell you something for a long time.",
-"You became special to me without me realizing it…",
-"Your smile stays in my thoughts…",
-"Your presence makes my world lighter…",
-"Somewhere along the way…",
-"I think I fell for you ❤️"
+
+const messages=[
+
+"Madam Malkay Husna, every day I realize that some people enter our life quietly but slowly become the most beautiful part of it. Your presence makes the world feel softer and kinder.",
+
+"Dear Madam Malkay Husna, sometimes the heart chooses someone without asking permission. Maybe that's why thoughts of you appear like gentle light in my day.",
+
+"Madam Malkay Husna, if kindness had a face it would probably look like you. You bring calmness to moments without even trying.",
+
+"Dear Madam Malkay Husna, some feelings are not loud but they stay constant, like a quiet star shining in the sky every night.",
+
+"Madam Malkay Husna, the world becomes a little more beautiful when someone like you exists in it."
+
 ];
 
-const confession=document.getElementById("confession");
-const question=document.getElementById("question");
-const buttons=document.querySelector(".buttons");
-const response=document.getElementById("response");
-const yesBtn=document.getElementById("yesBtn");
-const noBtn=document.getElementById("noBtn");
-const bgMusic=document.getElementById("bgMusic");
-const muteBtn=document.getElementById("muteBtn");
+function randomMessage(){
 
-let line=0;
-let char=0;
+return messages[Math.floor(Math.random()*messages.length)];
 
-/* Typing Effect */
-function typeEffect(){
-  if(line<textLines.length){
-    if(char<textLines[line].length){
-      confession.innerHTML+=textLines[line].charAt(char);
-      char++;
-      setTimeout(typeEffect,40);
-    }else{
-      confession.innerHTML+="<br><br>";
-      line++;
-      char=0;
-      setTimeout(typeEffect,600);
-    }
-  }else{
-    question.style.display="block";
-    buttons.style.display="flex";
-  }
 }
 
-/* Floating Hearts */
-function floatingHearts(){
-  const heart=document.createElement("div");
-  heart.className="heart";
-  heart.innerHTML="❤️";
-  heart.style.left=Math.random()*100+"vw";
-  document.body.appendChild(heart);
-  setTimeout(()=>heart.remove(),6000);
-}
-setInterval(floatingHearts,1200);
+function generateMessage(){
 
-/* Fireworks */
-function createFireworks(){
-  for(let i=0;i<40;i++){
-    const spark=document.createElement("div");
-    spark.className="spark";
-    spark.style.left=Math.random()*100+"vw";
-    spark.style.top=Math.random()*100+"vh";
-    document.body.appendChild(spark);
+const msg=randomMessage();
 
-    const dx=Math.random()*200-100;
-    const dy=Math.random()*200-100;
-    let start=null;
+document.getElementById("message").innerText=msg;
 
-    function animate(time){
-      if(!start)start=time;
-      const progress=(time-start)/600;
-      spark.style.transform=`translate(${dx*progress}px,${dy*progress}px)`;
-      spark.style.opacity=1-progress;
-      if(progress<1){
-        requestAnimationFrame(animate);
-      }else{
-        spark.remove();
-      }
-    }
-    requestAnimationFrame(animate);
-  }
+sendNotification(msg);
+
 }
 
-/* Heart Burst on YES */
-function heartBurst(){
-  for(let i=0;i<80;i++){
-    const heart=document.createElement("div");
-    heart.className="burst-heart";
-    heart.innerHTML="💖";
+function askNotification(){
 
-    const startX=window.innerWidth/2;
-    const startY=window.innerHeight/2;
+if("Notification" in window){
 
-    heart.style.left=startX+"px";
-    heart.style.top=startY+"px";
+Notification.requestPermission().then(permission=>{
 
-    document.body.appendChild(heart);
-
-    const angle=Math.random()*2*Math.PI;
-    const distance=Math.random()*400+100;
-
-    const x=Math.cos(angle)*distance;
-    const y=Math.sin(angle)*distance;
-
-    heart.animate([
-      {transform:"translate(0,0)",opacity:1},
-      {transform:`translate(${x}px,${y}px)`,opacity:0}
-    ],{
-      duration:1000,
-      easing:"ease-out"
-    });
-
-    setTimeout(()=>heart.remove(),1000);
-  }
+if(permission==="granted"){
+alert("Notifications enabled for Madam Malkay Husna ❤️");
+}else{
+alert("Please allow notifications to receive messages 💌");
 }
 
-/* YES Button Click */
-yesBtn.onclick=function(){
-  response.innerHTML="I love you Malkay Husna ❤️ Forever & Always 💍";
-  response.style.display="block";
-  buttons.style.display="none";
-  question.style.display="none";
+});
 
-  heartBurst();
-  createFireworks();
-};
-
-/* NO Button Move */
-function moveNo(){
-  const x=Math.random()*(window.innerWidth-120);
-  const y=Math.random()*(window.innerHeight-60);
-  noBtn.style.position="fixed";
-  noBtn.style.left=x+"px";
-  noBtn.style.top=y+"px";
 }
-noBtn.onmouseover=moveNo;
-noBtn.ontouchstart=moveNo;
 
-/* Music Mute Toggle */
-muteBtn.onclick=function(){
-  if(bgMusic.paused){
-    bgMusic.play();
-    muteBtn.innerHTML="🔊";
-  }else{
-    bgMusic.pause();
-    muteBtn.innerHTML="🔇";
-  }
-};
+}
 
-/* Autoplay on first click */
-document.body.addEventListener("click",()=>{
-  bgMusic.play().catch(()=>{});
-},{once:true});
+function sendNotification(text){
 
-/* Start typing */
-typeEffect();
+if(Notification.permission==="granted"){
+
+new Notification("💌 Message for Madam Malkay Husna",{
+body:text
+});
+
+}
+
+}
+
+/* countdown */
+
+function updateCountdown(){
+
+const now=new Date();
+
+const target1=new Date();
+target1.setHours(1,43,0,0);
+
+const target2=new Date();
+target2.setHours(13,43,0,0);
+
+let target;
+
+if(now<target1){
+target=target1;
+}
+else if(now<target2){
+target=target2;
+}
+else{
+target=new Date();
+target.setDate(target.getDate()+1);
+target.setHours(1,43,0,0);
+}
+
+const diff=target-now;
+
+const h=Math.floor(diff/1000/60/60);
+const m=Math.floor(diff/1000/60)%60;
+const s=Math.floor(diff/1000)%60;
+
+document.getElementById("countdown").innerText=
+"Next message in "+h+"h "+m+"m "+s+"s";
+
+}
+
+setInterval(updateCountdown,1000);
+
+/* auto message time */
+
+function checkTime(){
+
+const now=new Date();
+
+if(now.getHours()===1 && now.getMinutes()===43){
+generateMessage();
+}
+
+if(now.getHours()===13 && now.getMinutes()===43){
+generateMessage();
+}
+
+}
+
+setInterval(checkTime,30000);
+
+/* hearts everywhere */
+
+function createHeart(){
+
+const heart=document.createElement("div");
+
+heart.className="heart";
+heart.innerText="❤️";
+
+heart.style.left=Math.random()*100+"vw";
+heart.style.fontSize=(15+Math.random()*25)+"px";
+
+document.body.appendChild(heart);
+
+setTimeout(()=>{
+heart.remove();
+},5000);
+
+}
+
+setInterval(createHeart,200);
+
 </script>
 
 </body>
